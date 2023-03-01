@@ -4,15 +4,13 @@ import styles from "../../App.module.css";
 
 interface IProps {
     setMoneyDue: React.Dispatch<React.SetStateAction<number>>,
-    moneyDue: number
 }
 
 
-const ItemSelect: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
+const ItemSelect: React.FC<IProps> = ({ setMoneyDue }) => {
     return (
         <div className={styles.griditem}>
             ItemSelect
-            {moneyDue}
         </div>
     )
 }
