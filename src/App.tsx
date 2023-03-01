@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// import logo from './logo.svg'; //TODO Make Logo
+// import logo from './logo.svg'; //TODO: Make Logo
 import styles from './App.module.css';
 import ItemSelect from './components/ItemSelect/ItemSelect';
 import PaymentSection from './components/PaymentSection/PaymentSection';
