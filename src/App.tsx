@@ -8,7 +8,7 @@ import PayInfo from './components/PayInfo/PayInfo';
 
 function App() {
 
-  const [moneyDue, setMoneyDue] = useState(0);
+  const [moneyDue, setMoneyDue] = useState<number>(0);
   const [insertedMoney, setInsertedMoney] = useState(0);
 
   return (
@@ -17,8 +17,9 @@ function App() {
         VENDING MACHINE
       </header>
       <div className={styles.layoutcontainer} >
-        <ItemSelect />
-        <PayInfo />
+        {moneyDue}
+        <ItemSelect setMoneyDue={setMoneyDue} moneyDue={moneyDue} />
+        <PayInfo setInsertedMoney={setInsertedMoney} insertedMoney={insertedMoney} />
         <Controls />
       </div>
     </div >
