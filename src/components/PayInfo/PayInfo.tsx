@@ -10,24 +10,32 @@ interface IProps {
 
 const PayInfo: React.FC<IProps> = ({ insertedMoney, setInsertedMoney }) => {
 
-    // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    //     setInsertedMoney(
-    //         // [e.target.name]: e.target.value
-    //     )
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInsertedMoney(Number(e.target.value))
+    }
+
+    //use this to pay
+    // const onSubmit = (e) => {
+    //     e.preventDefault();
+    //     setInsertedMoney(insertedMoney);
     // }
 
     return (
         <div className={styles.griditem}>
             PayInfo <br />
             {insertedMoney}
-            {/* <input
-                type="number"
-                onChange={handleChange}
-                className="PayInfo-input"
-                name="age"
-                value={insertedMoney}
-                placeholder="Age"
-            /> */}
+            <form>
+                <label htmlFor='insertMoney'>Insert Money Here</label>
+                <input
+                    type="number"
+                    onChange={handleChange}
+                    className="PayInfo-input"
+                    name="age"
+                // value={insertedMoney}
+                // placeholder="0"
+                />
+                {/* <button type="submit">Insert this amount</button> */}
+            </form>
         </div>
     )
 }
