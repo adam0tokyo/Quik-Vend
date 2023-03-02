@@ -17,13 +17,13 @@ interface ReturnChange {
 }
 
 const initialReturnChange: ReturnChange = {
-    "1000": 0,
-    "500": 0,
-    "100": 0,
-    "50": 0,
-    "10": 0,
-    "5": 0,
-    "1": 0,
+    1000: 0,
+    500: 0,
+    100: 0,
+    50: 0,
+    10: 0,
+    5: 0,
+    1: 0,
 }
 
 const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
@@ -31,30 +31,10 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
     const [insertMoney, setInsertMoney] = useState<number>(0);
     const [returnMoney, setReturnMoney] = useState<ReturnChange>(initialReturnChange)
 
-    // function changeMaker(insertedMoney: number, moneyDue: number) {
-    //     // const denominations = [1000, 500, 100, 50, 10, 5, 1];
-    //     let denomCount: number;
-    //     // const returnChange: CoinHolder = {};
-    //     let remainingChange = insertedMoney - moneyDue;
-    //     setMoneyDue(0);
-
-    //     denominations.forEach((denom) => {
-    //         if (Math.floor(remainingChange / denom) > 0) {
-    //             denomCount = Math.floor(remainingChange / denom);
-    //             returnChange[denom] = denomCount;
-    //             remainingChange = remainingChange % denom;
-    //         }
-    //     })
-    // }
-
-
-    function changeMaker() {
+    function processReturnMoney() {
         let remainingChange = insertMoney - moneyDue;
-
         setMoneyDue(0);
-        let denomCount = 0;
         let sortedDenominations = Object.entries(returnMoney).sort((a: number[], b: number[]) => Number(b[0]) - Number(a[0]))
-        // console.log(sortedDenominations);
         //TODO: fix typing of this
         let tempGuy: any = initialReturnChange;
 
@@ -62,11 +42,8 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
         sortedDenominations.forEach((denom) => {
             //TODO: clean up function
             if (Math.floor(remainingChange / Number(denom[1])) > 0) {
-                denomCount = Math.floor(remainingChange / Number(denom[0]));
-                console.log(denom[0], denom[1]);
-
+                const denomCount = Math.floor(remainingChange / Number(denom[0]));
                 tempGuy[denom[0]] = denomCount
-
                 // returnChange[denom] = denomCount;
                 remainingChange = remainingChange % Number(denom[0]);
                 console.log("remainingChange:", remainingChange);
@@ -75,7 +52,6 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
         console.log(tempGuy);
         setReturnMoney(tempGuy)
     }
-
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInsertMoney(Number(e.target.value))
@@ -86,32 +62,22 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
     }
 
     const handleConfirm = () => {
-        //TODO: CONDITIONAL FOR NON-NUMBER, send alerts
         if (insertMoney >= moneyDue) {
-            changeMaker();
+            processReturnMoney();
             setInsertMoney(0)
-            console.log(returnMoney);
         }
     }
 
     const renderReturnMoney = (): JSX.Element[] => {
         return Object.entries(returnMoney).sort((a: number[], b: number[]) => Number(b[0]) - Number(a[0])).map(denom => {
             return (
-                <li className="List">
+                <li className="List" key={denom[0]}>
                     <p>{denom[0]}:</p>
                     <p>{denom[1]}</p>
                 </li >
             )
         })
     }
-
-
-
-    //use this to pay
-    // const onSubmit = (e) => {
-    //     e.preventDefault();
-    //     setInsertMoney(insertMoney);
-    // }
 
     return (
         <div className={styles.griditem}>
