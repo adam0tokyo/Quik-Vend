@@ -15,6 +15,7 @@ interface Iproduct {
 
 const ItemSelect: React.FC<IProps> = ({ setMoneyDue }) => {
 
+    //TODO: move to items component
     const productsList: Iproduct[] = [
         {
             name: 'cola',

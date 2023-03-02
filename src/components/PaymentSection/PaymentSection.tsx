@@ -51,6 +51,8 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
     }
 
     const handleConfirm = () => {
+        //TODO: remove conditional, break up? processReturnMoney, return error on insufficient inserted money
+        // etc., these need to be checked with tests, set button type to button?(don't clear inserted)
         if (insertMoney >= moneyDue) {
             processReturnMoney();
             setInsertMoney(0)
@@ -81,10 +83,8 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
                     onChange={handleChange}
                     className="PayInfo-input"
                     name="age"
-                    // value={insertMoney}
                     placeholder="0"
                 />
-                {/* <button type="submit">Insert this amount</button> */}
                 <button type="reset" onClick={handleConfirm}>Confirm</button>
                 <button type="reset" onClick={handleCancel}>Cancel</button>
             </form>
