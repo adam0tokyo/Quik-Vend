@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import styles from './App.module.css';
 import ItemSelect from './components/ItemSelect/ItemSelect';
 import PaymentSection from './components/PaymentSection/PaymentSection';
-
+import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid'
 
 function App() {
 
@@ -11,13 +12,25 @@ function App() {
 
   return (
     <div className="App">
-      <header className="main-header">
-        VENDING MACHINE
-      </header>
-      <div className={styles.layoutcontainer} >
-        <ItemSelect setMoneyDue={setMoneyDue} />
-        <PaymentSection setMoneyDue={setMoneyDue} moneyDue={moneyDue} />
-      </div>
+      <Container maxWidth="md">
+        <header className="main-header">
+          VENDING MACHINE
+        </header>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={6}>
+            <ItemSelect setMoneyDue={setMoneyDue} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <PaymentSection setMoneyDue={setMoneyDue} moneyDue={moneyDue} />
+          </Grid>
+
+
+
+        </Grid>
+
+
+
+      </Container>
     </div >
   );
 }

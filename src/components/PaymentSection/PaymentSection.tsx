@@ -53,6 +53,7 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
     const handleConfirm = () => {
         //TODO: remove conditional, break up? processReturnMoney, return error on insufficient inserted money
         // etc., these need to be checked with tests, set button type to button?(don't clear inserted)
+        //TODO: add alerts for success, failure, etc.
         if (insertMoney >= moneyDue) {
             processReturnMoney();
             setInsertMoney(0)
