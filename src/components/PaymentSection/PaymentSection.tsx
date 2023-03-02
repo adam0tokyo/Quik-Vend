@@ -6,17 +6,11 @@ interface IProps {
     moneyDue: number
 }
 
-interface ReturnChange {
-    1000: number,
-    500: number,
-    100: number,
-    50: number,
-    10: number,
-    5: number,
-    1: number
+interface IReturnMoney {
+    [key: string]: number;
 }
 
-const initialReturnChange: ReturnChange = {
+const initialReturnMoney: IReturnMoney = {
     1000: 0,
     500: 0,
     100: 0,
@@ -29,28 +23,23 @@ const initialReturnChange: ReturnChange = {
 const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
 
     const [insertMoney, setInsertMoney] = useState<number>(0);
-    const [returnMoney, setReturnMoney] = useState<ReturnChange>(initialReturnChange)
+    const [returnMoney, setReturnMoney] = useState<IReturnMoney>(initialReturnMoney)
 
     function processReturnMoney() {
         let remainingChange = insertMoney - moneyDue;
         setMoneyDue(0);
-        let sortedDenominations = Object.entries(returnMoney).sort((a: number[], b: number[]) => Number(b[0]) - Number(a[0]))
-        //TODO: fix typing of this
-        let tempGuy: any = initialReturnChange;
-
+        let sortedDenominations = Object.entries(returnMoney)
+            .sort((a: [string, number], b: [string, number]) => Number(b[0]) - Number(a[0]));
+        let updatedReturnMoney: IReturnMoney = initialReturnMoney;
 
         sortedDenominations.forEach((denom) => {
-            //TODO: clean up function
             if (Math.floor(remainingChange / Number(denom[1])) > 0) {
                 const denomCount = Math.floor(remainingChange / Number(denom[0]));
-                tempGuy[denom[0]] = denomCount
-                // returnChange[denom] = denomCount;
+                updatedReturnMoney[denom[0]] = denomCount;
                 remainingChange = remainingChange % Number(denom[0]);
-                console.log("remainingChange:", remainingChange);
             }
         })
-        console.log(tempGuy);
-        setReturnMoney(tempGuy)
+        setReturnMoney(updatedReturnMoney)
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,14 +58,15 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
     }
 
     const renderReturnMoney = (): JSX.Element[] => {
-        return Object.entries(returnMoney).sort((a: number[], b: number[]) => Number(b[0]) - Number(a[0])).map(denom => {
-            return (
-                <li className="List" key={denom[0]}>
-                    <p>{denom[0]}:</p>
-                    <p>{denom[1]}</p>
-                </li >
-            )
-        })
+        return Object.entries(returnMoney)
+            .sort((a: [string, number], b: [string, number]) => Number(b[0]) - Number(a[0]))
+            .map((denom: [string, number]) => {
+                return (
+                    <li className="List" key={denom[0]}>
+                        {denom[0]}: {denom[1]}
+                    </li >
+                )
+            })
     }
 
     return (
