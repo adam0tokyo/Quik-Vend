@@ -1,6 +1,14 @@
 import React from 'react'
-import styles from "../../App.module.css";
+// import styles from "../../App.module.css";
 // import styles from "./ItemSelect.module.css"
+import Grid from '@mui/material/Grid'
+import { Card } from '@mui/material';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
+
+
 
 interface IProps {
     setMoneyDue: React.Dispatch<React.SetStateAction<number>>,
@@ -18,21 +26,21 @@ const ItemSelect: React.FC<IProps> = ({ setMoneyDue }) => {
     //TODO: move to items component
     const productsList: Iproduct[] = [
         {
-            name: 'cola',
+            name: 'SODA',
             description: 'A nice, refreshing drink',
-            imageURL: 'none',
+            imageURL: '/images/Campari_Soda.jpg',
             price: 220,
         },
         {
-            name: 'lemonaid',
+            name: 'FRUIT PUNCH',
             description: 'when life gives you lemons',
-            imageURL: 'none',
+            imageURL: '/images/fruit_punch.webp',
             price: 111,
         },
         {
-            name: 'juice',
+            name: 'KIWI JUICE',
             description: 'which fruit??',
-            imageURL: 'none',
+            imageURL: '/images/kiwi-wheatgrass-juice.jpg',
             price: 7001,
         }
     ]
@@ -41,28 +49,39 @@ const ItemSelect: React.FC<IProps> = ({ setMoneyDue }) => {
         setMoneyDue(price)
     }
 
-    const renderProducts = (): JSX.Element[] => {
-        return productsList.map((product: Iproduct) => {
-            return (
-                <li className="List" key={product.name}>
-                    {product.name}<br />
-                    {product.description}<br />
-                    <button type="button" onClick={() => handleSelectedProduct(product.price)}>{product.price}</button><br />
-                </li >
-            )
-        })
-    }
+
 
 
 
     return (
+        <Grid container spacing={2}>
+            {productsList.map((product: Iproduct) => {
+                return (
+                    <Grid item xs={6} md={6}>
+                        <Card sx={{ maxWidth: 800 }}>
+                            <CardActionArea
+                                onClick={() => handleSelectedProduct(product.price)}
+                            >
+                                <CardMedia
+                                    component="img"
+                                    height="150"
+                                    image={product.imageURL}
+                                    alt={product.name}
+                                />
+                                <CardContent>
+                                    <Typography variant="h4">
+                                        {product.name}  {product.price}
+                                    </Typography>
+                                    <Typography gutterBottom variant="h5" component="div">
 
-        <div className={styles.griditem}>
-            ItemSelect
-            <ul>
-                {renderProducts()}
-            </ul>
-        </div>
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                )
+            })}
+        </Grid >
 
     )
 }
