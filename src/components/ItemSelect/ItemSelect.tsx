@@ -3,10 +3,11 @@ import React from 'react'
 // import styles from "./ItemSelect.module.css"
 import Grid from '@mui/material/Grid'
 import { Card } from '@mui/material';
-import CardContent from '@mui/material/CardContent';
+// import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import { Box } from '@mui/material';
 
 
 
@@ -58,7 +59,7 @@ const ItemSelect: React.FC<IProps> = ({ setMoneyDue }) => {
             {productsList.map((product: Iproduct) => {
                 return (
                     <Grid item xs={6} md={6}>
-                        <Card sx={{ maxWidth: 800 }}>
+                        <Card sx={{ maxWidth: 800, display: 'flex', '&:hover': { '& $overlay': { opacity: 1 } } }}>
                             <CardActionArea
                                 onClick={() => handleSelectedProduct(product.price)}
                             >
@@ -68,14 +69,14 @@ const ItemSelect: React.FC<IProps> = ({ setMoneyDue }) => {
                                     image={product.imageURL}
                                     alt={product.name}
                                 />
-                                <CardContent>
-                                    <Typography variant="h4">
-                                        {product.name}  {product.price}
-                                    </Typography>
-                                    <Typography gutterBottom variant="h5" component="div">
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 
+                                    <Typography variant="h5">
+                                        {product.name}
+                                    </Typography><Typography gutterBottom variant="h5" component="div" align='right'>
+                                        {product.price}
                                     </Typography>
-                                </CardContent>
+                                </Box>
                             </CardActionArea>
                         </Card>
                     </Grid>
