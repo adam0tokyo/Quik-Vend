@@ -70,10 +70,9 @@ const ItemSelect: React.FC<IProps> = ({ setMoneyDue }) => {
                                     alt={product.name}
                                 />
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-
                                     <Typography variant="h5">
                                         {product.name}
-                                    </Typography><Typography gutterBottom variant="h5" component="div" align='right'>
+                                    </Typography><Typography variant="h4" component="div" align='right'>
                                         {product.price}
                                     </Typography>
                                 </Box>

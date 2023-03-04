@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styles from "../../App.module.css";
+import Paper from '@mui/material/Paper';
 
 interface IProps {
     setMoneyDue: React.Dispatch<React.SetStateAction<number>>,
@@ -73,7 +74,8 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
     }
 
     return (
-        <div className={styles.griditem}>
+        <Paper elevation={4}>
+
             PayInfo <br />
             Balance Due: {moneyDue}
 
@@ -96,7 +98,7 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
             <ul>
                 {renderReturnMoney()}
             </ul>
-        </div>
+        </Paper>
     )
 }
 

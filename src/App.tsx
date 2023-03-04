@@ -13,15 +13,15 @@ function App() {
 
   return (
     <div>
-      <Container maxWidth="md">
-        <Typography variant='h1' sx={{ fontWeight: 'bold' }} >
+      <Container maxWidth="lg">
+        <Typography variant='h1' align='center' sx={{ fontWeight: 'bold' }} >
           VENDING MACHINE
         </Typography>
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={6}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={8}>
             <ItemSelect setMoneyDue={setMoneyDue} />
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={4}>
             <PaymentSection setMoneyDue={setMoneyDue} moneyDue={moneyDue} />
           </Grid>
         </Grid>
