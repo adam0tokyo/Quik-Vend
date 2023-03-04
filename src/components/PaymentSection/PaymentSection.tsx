@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
-import styles from "../../App.module.css";
+// import styles from "../../App.module.css";
 import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { List, ListItem, ListItemText } from '@mui/material';
 
 interface IProps {
     setMoneyDue: React.Dispatch<React.SetStateAction<number>>,
@@ -34,7 +38,7 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
         let updatedReturnMoney: IReturnMoney = initialReturnMoney;
 
         sortedDenominations.forEach((denom) => {
-            if (Math.floor(remainingChange / Number(denom[1])) > 0) {
+            if (Math.floor(remainingChange / Number(denom[1])) >= 0) {
                 const denomCount = Math.floor(remainingChange / Number(denom[0]));
                 updatedReturnMoney[denom[0]] = denomCount;
                 remainingChange = remainingChange % Number(denom[0]);
@@ -47,13 +51,14 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
         setInsertMoney(Number(e.target.value))
     }
 
-    const handleCancel = () => {
-        setInsertMoney(0)
-    }
+    // const handleCancel = () => {
+    //     setInsertMoney(0)
+    // }
 
     const handleConfirm = () => {
-        //TODO: remove conditional, break up? processReturnMoney, return error on insufficient inserted money
-        // etc., these need to be checked with tests, set button type to button?(don't clear inserted)
+        //TODO: fix conditional, clean up processReturnMoney
+        //TODO: Error handling / validation
+        //TODO: unit tests
         //TODO: add alerts for success, failure, etc.
         if (insertMoney >= moneyDue) {
             processReturnMoney();
@@ -63,41 +68,48 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
 
     const renderReturnMoney = (): JSX.Element[] => {
         return Object.entries(returnMoney)
-            .sort((a: [string, number], b: [string, number]) => Number(b[0]) - Number(a[0]))
+            .sort((a: [string, number], b: [string, number]) => Number(a[0]) - Number(b[0]))
             .map((denom: [string, number]) => {
+                //TODO: add keys to fix console error
                 return (
-                    <li className="List" key={denom[0]}>
-                        {denom[0]}: {denom[1]}
-                    </li >
+                    <ListItem>
+                        <ListItemText primary={denom[0]} />
+                        <ListItemText
+                            sx={{ textAlign: 'right' }}
+                            primary={denom[1]}
+                        />
+                    </ListItem>
                 )
             })
     }
 
     return (
-        <Paper elevation={4}>
-
-            PayInfo <br />
-            Balance Due: {moneyDue}
-
-            <form>
-                <label htmlFor='insertMoney'>Insert Money</label>
-                <input
-                    type="number"
-                    onChange={handleChange}
-                    className="PayInfo-input"
-                    name="age"
-                    placeholder="0"
-                />
-                <button type="reset" onClick={handleConfirm}>Confirm</button>
-                <button type="reset" onClick={handleCancel}>Cancel</button>
-            </form>
-            Inserted Money <br />
-            {insertMoney} <br />
+        <Paper elevation={3} sx={{ p: 2, }}>
+            <Typography variant='h4'>
+                BALANCE DUE: {moneyDue}
+            </Typography>
             <br />
-            Returned Coins
-            <ul>
+            <TextField
+                defaultValue="0"
+                value={insertMoney}
+                id="outlined-number"
+                label="Insert Money"
+                type="number"
+                onChange={handleChange}
+                InputLabelProps={{
+                    shrink: true,
+                }}></TextField>
+            <br /><br />
+            <Button variant="contained" color="success" onClick={handleConfirm}>
+                CONFRIM
+            </Button>
+            <br /><br />
+            <Typography variant='h5'>
+                RETURNED CHANGE
+            </Typography>
+            <List dense>
                 {renderReturnMoney()}
-            </ul>
+            </List>
         </Paper>
     )
 }

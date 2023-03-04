@@ -9,7 +9,7 @@ import { Typography } from '@mui/material';
 
 function App() {
 
-  const [moneyDue, setMoneyDue] = useState<number>(500);
+  const [moneyDue, setMoneyDue] = useState<number>(0);
 
   return (
     <div>

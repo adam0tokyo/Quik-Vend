@@ -57,6 +57,7 @@ const ItemSelect: React.FC<IProps> = ({ setMoneyDue }) => {
     return (
         <Grid container spacing={2}>
             {productsList.map((product: Iproduct) => {
+                //TODO: add keys to fix console error
                 return (
                     <Grid item xs={6} md={6}>
                         <Card sx={{ maxWidth: 800, display: 'flex', '&:hover': { '& $overlay': { opacity: 1 } } }}>
@@ -69,7 +70,7 @@ const ItemSelect: React.FC<IProps> = ({ setMoneyDue }) => {
                                     image={product.imageURL}
                                     alt={product.name}
                                 />
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <Box sx={{ p: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <Typography variant="h5">
                                         {product.name}
                                     </Typography><Typography variant="h4" component="div" align='right'>
