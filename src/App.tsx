@@ -14,7 +14,7 @@ function App() {
   return (
     <div>
       <Container maxWidth="lg">
-        <Typography variant='h1' align='center' sx={{ fontWeight: 'bold' }} >
+        <Typography variant='h2' align='center' sx={{ fontWeight: 'bold', m: 3 }} >
           VENDING MACHINE
         </Typography>
         <Grid container spacing={2}>

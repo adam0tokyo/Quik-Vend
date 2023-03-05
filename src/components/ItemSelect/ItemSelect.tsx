@@ -24,7 +24,7 @@ interface Iproduct {
 
 const ItemSelect: React.FC<IProps> = ({ setMoneyDue }) => {
 
-    //TODO: move to items component
+    //TODO: move to items component, add more
     const productsList: Iproduct[] = [
         {
             name: 'SODA',
@@ -59,7 +59,7 @@ const ItemSelect: React.FC<IProps> = ({ setMoneyDue }) => {
             {productsList.map((product: Iproduct) => {
                 //TODO: add keys to fix console error
                 return (
-                    <Grid item xs={6} md={6}>
+                    <Grid item xs={6} md={6} key={product.name}>
                         <Card sx={{ maxWidth: 800, display: 'flex', '&:hover': { '& $overlay': { opacity: 1 } } }}>
                             <CardActionArea
                                 onClick={() => handleSelectedProduct(product.price)}

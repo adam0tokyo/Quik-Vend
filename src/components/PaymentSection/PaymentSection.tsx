@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// import styles from "../../App.module.css";
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -59,7 +58,6 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
         //TODO: fix conditional, clean up processReturnMoney
         //TODO: Error handling / validation
         //TODO: unit tests
-        //TODO: add alerts for success, failure, etc.
         if (insertMoney >= moneyDue) {
             processReturnMoney();
             setInsertMoney(0)
@@ -70,9 +68,8 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
         return Object.entries(returnMoney)
             .sort((a: [string, number], b: [string, number]) => Number(a[0]) - Number(b[0]))
             .map((denom: [string, number]) => {
-                //TODO: add keys to fix console error
                 return (
-                    <ListItem>
+                    <ListItem key={denom[0]}>
                         <ListItemText primary={denom[0]} />
                         <ListItemText
                             sx={{ textAlign: 'right' }}
@@ -84,21 +81,23 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
     }
 
     return (
-        <Paper elevation={3} sx={{ p: 2, }}>
+        <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
             <Typography variant='h4'>
                 BALANCE DUE: {moneyDue}
             </Typography>
             <br />
             <TextField
-                defaultValue="0"
                 value={insertMoney}
                 id="outlined-number"
                 label="Insert Money"
-                type="number"
+                type="text"
                 onChange={handleChange}
                 InputLabelProps={{
                     shrink: true,
-                }}></TextField>
+                }}
+                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+            >
+            </TextField>
             <br /><br />
             <Button variant="contained" color="success" onClick={handleConfirm}>
                 CONFRIM
