@@ -47,12 +47,7 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
         setInsertMoney(Number(e.target.value))
     }
 
-    // const handleCancel = () => {
-    //     setInsertMoney(0)
-    // }
-
     const handleConfirm = () => {
-        //TODO: Error handling / validation
         //TODO: unit tests
         if (insertMoney >= moneyDue) {
             processReturnMoney();
@@ -81,24 +76,22 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
             <Typography variant='h4'>
                 BALANCE DUE: {moneyDue}
             </Typography>
-            <br />
             <TextField
                 value={insertMoney}
                 id="outlined-number"
-                label="Insert Money"
+                label="PLEASE INSERT MONEY"
                 type="text"
                 onChange={handleChange}
                 InputLabelProps={{
                     shrink: true,
                 }}
                 inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                sx={{ mt: 3 }}
             >
-            </TextField>
-            <br /><br />
-            <Button variant="contained" color="success" onClick={handleConfirm}>
+            </TextField><br />
+            <Button variant="contained" color="success" onClick={handleConfirm} sx={{ mt: 3, mb: 3 }}>
                 CONFRIM
             </Button>
-            <br /><br />
             <Typography variant='h5'>
                 RETURNED CHANGE
             </Typography>
