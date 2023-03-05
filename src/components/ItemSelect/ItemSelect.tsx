@@ -8,7 +8,6 @@ interface IProps {
 
 interface Iproduct {
     name: string;
-    description: string;
     imageURL: string;
     price: number;
 }
@@ -20,7 +19,7 @@ const ItemSelect: React.FC<IProps> = ({ setMoneyDue }) => {
     }
 
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} mb={3}>
             {productList.map((product: Iproduct) => {
                 return (
                     <Grid item xs={6} md={6} key={product.name}>
