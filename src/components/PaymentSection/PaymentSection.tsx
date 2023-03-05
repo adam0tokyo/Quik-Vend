@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { List, ListItem, ListItemText } from '@mui/material';
+import { Typography, TextField, Button, List, ListItem, ListItemText } from '@mui/material';
 
 interface IProps {
     setMoneyDue: React.Dispatch<React.SetStateAction<number>>,
@@ -55,7 +52,6 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
     // }
 
     const handleConfirm = () => {
-        //TODO: fix conditional, clean up processReturnMoney
         //TODO: Error handling / validation
         //TODO: unit tests
         if (insertMoney >= moneyDue) {
