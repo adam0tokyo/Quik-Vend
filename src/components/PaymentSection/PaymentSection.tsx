@@ -80,7 +80,7 @@ const PaymentSection: React.FC<IProps> = ({ setMoneyDue, moneyDue }) => {
                 value={insertMoney}
                 id="outlined-number"
                 label="PLEASE INSERT MONEY"
-                type="text"
+                type="number"
                 onChange={handleChange}
                 InputLabelProps={{
                     shrink: true,
