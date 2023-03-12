@@ -1,6 +1,6 @@
 # VENDING MACHINE
 
-This is a simple web app built with Typescript in React.
+This is a simple web app built with TypeScript in React.
 
 A vending machine where users can select items and insert money, while receiving correct change.
 
