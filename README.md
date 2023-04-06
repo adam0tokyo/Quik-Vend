@@ -1,4 +1,4 @@
-# QUICK VEND
+# QUIK VEND
 
 This is a simple web app built with TypeScript in React.
 
